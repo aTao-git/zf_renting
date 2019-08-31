@@ -39,7 +39,6 @@ class Layout extends React.Component {
             selectedIcon={<i className="iconfont icon-findHouse"></i>}
             title='找房'
             key='List'
-            badge={'new'}
             selected={this.props.match.url === '/list'}
             onPress={() => {
               this.props.history.push('/list')
