@@ -1,17 +1,16 @@
 import React from 'react'
-
-import { Carousel, WingBlank } from 'antd-mobile'
-import axios from 'axios'
+import { axios } from '../../utils/request'
+import { Carousel } from 'antd-mobile'
 export default class Home extends React.Component {
   state = {
     imageList: []
   }
   componentDidMount() {
     // simulate img loading
-    axios.get('http://hkzf.zbztb.cn/home/swiper').then(res => {
+    axios.get('/home/swiper').then(res => {
       console.log(res)
       this.setState({
-        imageList: res.data.body
+        imageList: res.body
       })
     })
   }
