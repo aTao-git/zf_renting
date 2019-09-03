@@ -1,6 +1,6 @@
 import { CITY_SET } from '../actionTypes'
 const defaultState = {
-  cityName: 'xxx...'
+  cityName: ''
 }
 export default (state = defaultState, action) => {
   const {type, value} = action

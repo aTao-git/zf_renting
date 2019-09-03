@@ -1,0 +1,40 @@
+.list_content {
+    width: 100%;
+    height: calc(100vh - 45px);
+    background: #fff;
+    .city_list_title {
+        height: 40px;
+        padding-left: 15px;
+        display: flex;
+        align-items: center;
+        color: #666;
+        font-size: 12px;
+    }
+    .city_list_content {
+        .list_item {
+            display: flex;
+            height: 40px;
+            padding-left: 15px;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 15px;
+            align-items: center;
+        }
+    }
+}
+.right_tab {
+    position: fixed;
+    top: 10%;
+    right: 3px;
+    .right_item {
+        width: 28px; 
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .active {
+        background: #21b97a;
+        border-radius: 50%;
+        color: #fff;
+    }
+}
