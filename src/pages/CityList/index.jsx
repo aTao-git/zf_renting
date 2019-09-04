@@ -5,7 +5,9 @@ import { axios } from '../../utils/request'
 import store from '../../store'
 import styles from './index.module.scss'
 import { AutoSizer, List } from 'react-virtualized'
+import { citySet } from '../../store/actionCreator'
 export default class CityList extends React.Component {
+  Unsubscribe = null
   // eslint-disable-next-line no-useless-constructor
   constructor() {
     super()
@@ -14,8 +16,8 @@ export default class CityList extends React.Component {
       arrKey: [],
       selectIndex: 0
     }
-    store.subscribe(this.getLocalCity)
-    this.MainList=React.createRef()
+    this.Unsubscribe = store.subscribe(this.getLocalCity)
+    this.MainList = React.createRef()
   }
   componentDidMount() {
     const { mapReducer } = store.getState()
@@ -53,8 +55,8 @@ export default class CityList extends React.Component {
         {/* 城市列表结束 */}
         {/* 右侧索引栏部分开始 */}
         <div className={styles.right_tab}>
-          {this.state.arrKey.map((v, i) => 
-          <div onClick={this.changeCityList.bind(this, i)} key={i} className={styles.right_item + ' ' + (i === this.state.selectIndex ? styles.active : '')}>{v}</div>)}
+          {this.state.arrKey.map((v, i) =>
+            <div onClick={this.changeCityList.bind(this, i)} key={i} className={styles.right_item + ' ' + (i === this.state.selectIndex ? styles.active : '')}>{v}</div>)}
         </div>
         {/* 右侧索引栏部分结束 */}
       </div>
@@ -73,17 +75,17 @@ export default class CityList extends React.Component {
         </div>
         <div className={styles.city_list_content}>
           {item[localCity].map((v, i) => {
-            return <div key={i} className={styles.list_item}>{v}</div>
+            return <div onClick={this.goToHome.bind(this, v)} key={i} className={styles.list_item}>{v}</div>
           })}
         </div>
       </div>
     )
   }
-  rowHeight = ({index}) => {
+  rowHeight = ({ index }) => {
     const item = this.state.totalCity[index]
     return (Object.values(item)[0].length + 1) * 40
   }
-  onRowsRendered = ({startIndex}) => {
+  onRowsRendered = ({ startIndex }) => {
     if (startIndex === this.state.selectIndex) {
       return
     }
@@ -91,9 +93,12 @@ export default class CityList extends React.Component {
       selectIndex: startIndex
     })
   }
-  changeCityList (i) {
-    console.log(this.MainList)
+  changeCityList(i) {
     this.MainList.current.scrollToRow(i)
+  }
+  goToHome(v) {
+    store.dispatch(citySet(v))
+    this.props.history.go(-1)
   }
   // async 不允许用来修饰一个变量，后面只能跟一个函数
   getLocalCity = async () => {
@@ -139,5 +144,6 @@ export default class CityList extends React.Component {
       totalCity,
       arrKey
     })
+    this.Unsubscribe()
   }
 }

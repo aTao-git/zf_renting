@@ -1,0 +1,9 @@
+.container {
+    height: 100vh;
+    .mapContainer {
+        height: calc(100vh - 45px);
+        .mapmap {
+            height: 100%;
+        }
+    }
+}

@@ -3,12 +3,13 @@ import styles from './search.module.scss'
 import store from '../../store'
 import { withRouter } from 'react-router-dom'
 class SearchInput extends React.Component {
+  Unsubscribe = null
   constructor() {
     super()
     this.state = {
       cityName: store.getState().mapReducer.cityName
     }
-    store.subscribe(() => {
+    this.Unsubscribe = store.subscribe(() => {
       this.setState({
         cityName: store.getState().mapReducer.cityName
       })
@@ -31,13 +32,19 @@ class SearchInput extends React.Component {
           </div>
         </div>
         <div className={styles.search_input_icon}>
-          <i className={'iconfont icon-map ' + styles['icon-map']}></i>
+          <i onClick={this.handleToMap.bind(this)} className={'iconfont icon-map ' + styles['icon-map']}></i>
         </div>
       </div>
     )
   }
+  componentWillUnmount () {
+    this.Unsubscribe()
+  }
   handleSearchCity() {
     this.props.history.push('/citylist')
+  }
+  handleToMap () {
+    this.props.history.push('./MapPages')
   }
 }
 export default withRouter(SearchInput)
