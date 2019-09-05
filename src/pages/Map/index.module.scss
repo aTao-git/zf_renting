@@ -4,6 +4,23 @@
         height: calc(100vh - 45px);
         .mapmap {
             height: 100%;
+            .circle {
+                height: 60px;
+                width: 60px;
+                background: yellowgreen;
+                color: #fff;
+                border: 1px solid currentColor;
+                border-radius: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .rect {
+                background: yellowgreen;
+                color: #fff;
+                padding: 5px;
+            }
         }
     }
 }
