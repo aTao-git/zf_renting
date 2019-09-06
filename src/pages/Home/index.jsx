@@ -38,8 +38,8 @@ export default class Home extends React.Component {
         {/* 轮播图部分开始 */}
         <div className={styles.zf_slider}>
           <div className={styles.search_input}>
-        <SearchInput />
-        </div>
+            <SearchInput />
+          </div>
           {this.state.imageList.length && (
             <Carousel autoplay infinite>
               {this.state.imageList.map(val => (
@@ -104,7 +104,7 @@ export default class Home extends React.Component {
                   <p>{v.desc}</p>
                 </div>
                 <div className={styles.group_item_img}>
-                  <img src={REACT_APP_API_URL + v.imgSrc} alt=""/>
+                  <img src={REACT_APP_API_URL + v.imgSrc} alt="" />
                 </div>
               </div>)}
             </div>
@@ -119,7 +119,7 @@ export default class Home extends React.Component {
             </div>
             {this.state.newsList.map(v => <div key={v.id} className={styles.news_item}>
               <div className={styles.news_item_img}>
-                <img src={REACT_APP_API_URL + v.imgSrc} alt=""/>
+                <img src={REACT_APP_API_URL + v.imgSrc} alt="" />
               </div>
               <div className={styles.news_item_main}>
                 <div className={styles.news_main_top}>

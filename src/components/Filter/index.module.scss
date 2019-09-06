@@ -1,0 +1,15 @@
+.zf_filter {
+    .filter_title {
+        display: flex;
+        margin-top: 10px;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+      .title_item {
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+        padding: 15px 0;
+      }
+    }
+  }

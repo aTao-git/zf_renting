@@ -3,7 +3,7 @@ import { NavBar, Icon, Carousel } from 'antd-mobile'
 import { REACT_APP_API_URL } from "../../utils/urls"
 import { axios } from "../../utils/request"
 import styles from "./index.module.scss"
-const BMap = window.BMap;
+const BMap = window.BMap
 class Details extends React.Component {
 
     state = {
