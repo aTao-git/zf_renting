@@ -3,10 +3,12 @@ import styles from './index.module.scss'
 import { NavBar, Icon } from 'antd-mobile'
 import { axios } from '../../utils/request'
 import store from '../../store'
+import { REACT_APP_API_URL } from '../../utils/urls'
 const BMap = window.BMap
 export default class MapPages extends React.Component {
     // 全局的地图对象
     Map = null
+    Unsubscribe = null
     // 设置不同级别地图应该显示的信息
     Sites = [
         { zoom: 11, level: 1, shape: 'circle', name: '区域' },
@@ -18,7 +20,11 @@ export default class MapPages extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor() {
         super()
-        store.subscribe(this.getCityInfo)
+        this.Unsubscribe = store.subscribe(this.getCityInfo)
+        this.state = {
+            isShow: false,
+            houseList: []
+        }
     }
     render() {
         return (
@@ -30,6 +36,7 @@ export default class MapPages extends React.Component {
                 >地图找房</NavBar>
                 <div className={styles.mapContainer}>
                     <div className={styles.mapmap} id="mapmap"></div>
+                    {this.renderHouseList()}
                 </div>
             </div>
         )
@@ -43,6 +50,11 @@ export default class MapPages extends React.Component {
             this.getCityInfo()
         }
     }
+
+    componentWillUnmount() {
+        this.Unsubscribe()
+    }
+
     getCityInfo = async () => {
         const cityName = store.getState().mapReducer.cityName
         // 创建地图实例  
@@ -56,10 +68,44 @@ export default class MapPages extends React.Component {
         this.Map.addControl(new BMap.ScaleControl())
         const cityInfo = (await axios.get('/area/info?name=' + cityName)).body
         this.drawCityHouse(cityInfo)
+        this.Map.addEventListener("dragstart", () => {
+            this.setState({ isShow: false })
+        })
+    }
+    getHouseInfo = async (id) => {
+        const res = (await axios.get('/houses?cityId=' + id))
+        this.setState({
+            houseList: res.body.list
+        })
+    }
+    // 显示房屋列表
+    renderHouseList = () => {
+        return (
+            <div className={[styles.house_detail_list, this.state.isShow ? styles.h40 : ''].join(' ')} >
+                <div className={styles.house_detail_list_title}>
+                    <span>房屋列表</span>
+                    <span>更多</span>
+                </div>
+                <div className={styles.house_detail_list_content}>
+                    {this.state.houseList.map((v, i) =>
+                        <div onClick={() => this.props.history.push("/detail/" + v.houseCode)} key={i} className={styles.house_item}>
+                            <div className={styles.house_item_img_wrap}>
+                                <img src={REACT_APP_API_URL + v.houseImg} alt="" />
+                            </div>
+                            <div className={styles.house_item_info_wrap}>
+                                <div className={styles.house_info1}>{v.title}</div>
+                                <div className={styles.house_info2}>{v.desc}</div>
+                                <div className={styles.house_info3}>{v.tags.map(vv => <span key={vv} > {vv}</span>)}</div>
+                                <div className={styles.house_info4}><span>{v.price}</span>元/月  </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        )
     }
     async drawCityHouse(cityInfo) {
         const res = (await axios.get('/area/map?id=' + cityInfo.value)).body
-        console.log(res)
         this.Map.clearOverlays()
         if (this.Sites[this.SitesIndex].zoom !== this.Sites[0].zoom) {
             const point = new BMap.Point(cityInfo.coord.longitude, cityInfo.coord.latitude)
@@ -83,10 +129,16 @@ export default class MapPages extends React.Component {
             });
             label.addEventListener('click', () => {
                 if (this.SitesIndex === this.Sites.length) {
-                    this.Map.panTo(point)
+                    this.getHouseInfo(v.value)
+                    this.setState({
+                        isShow: true
+                    })
+                    setTimeout(() => {
+                        this.Map.panTo(point)
+                    }, 500)
                 } else {
                     this.drawCityHouse(v)
-                }   
+                }
             })
             this.Map.addOverlay(label)
         })

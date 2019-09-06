@@ -9,7 +9,8 @@ import Layout from './components/Layout'
 import CityList from './pages/CityList'
 import store from './store'
 import { citySet } from './store/actionCreator'
-import MapPages from './pages/Map';
+import MapPages from './pages/Map'
+import Details from './pages/Detail'
 export default class App extends React.Component {
   componentDidMount () {
     this.getLocalCity()
@@ -31,6 +32,7 @@ export default class App extends React.Component {
           <Route path="/my" render={() => <Layout><My /></Layout>} />
           <Route path="/citylist" component={ CityList } />
           <Route path="/MapPages" component={ MapPages } />
+          <Route path="/detail/:id" component={ Details } />
         </Router>
       </React.Fragment>
     )

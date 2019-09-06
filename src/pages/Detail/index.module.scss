@@ -1,0 +1,72 @@
+.hk_detail {
+    background-color: #fff;
+  }
+  .detail_house_title_wrap {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    .detail_house_title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+  
+    .detail_house_title_tags {
+      padding: 10px 0;
+      span {
+        color: green;
+        background-color: aqua;
+        margin-right: 10px;
+      }
+    }
+  }
+  
+  .detail_house_info {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    .detail_house_info_item_wrap {
+      flex: 1;
+      text-align: center;
+      .detail_house_info_item1 {
+        padding: 10px 0;
+        color: red;
+        span {
+          font-weight: 600;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  
+  .detail_roomType {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 10px solid #000;
+    .detail_roomType_item {
+      width: 50%;
+      padding: 10px 0;
+      font-size: 14px;
+      letter-spacing: 3px;
+      span:nth-child(1) {
+        color: #666;
+      }
+      span:nth-child(2) {
+        color: #000;
+      }
+    }
+  }
+  .detail_address {
+    .detail_address_title {
+      padding: 10px;
+      font-size: 16px;
+    
+    }
+    .detail_address_content {
+      .detail_map {
+        height: 150px;
+      }
+    }
+  }
+  
+  
+  
