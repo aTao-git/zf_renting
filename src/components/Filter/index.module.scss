@@ -13,3 +13,95 @@
       }
     }
   }
+.filter_other {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 1000;
+  .filter_other_mask {
+    flex: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+    .filter_other_main {
+      flex: 9;
+      height: 100vh;
+      background-color: #fff;
+
+      .filter_other_main_list {
+        padding: 10px;
+        overflow: auto;
+        height: calc(100vh - 50px);
+        .filter_other_group {
+          border-bottom: 1px solid #ccc;
+          padding: 10px 0;
+          .filter_other_group_title {
+            font-size: 16px;
+            padding: 10px 0;
+          }
+
+          .filter_other_group_content {
+            display: flex;
+            flex-wrap: wrap;
+            .filter_other_item {
+              width: 27%;
+              height: 35px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: #666;
+              border: 1px solid #ccc;
+              margin-right: 10px;
+              margin-top: 15px;
+            }
+            .filter_other_item_active{
+              background-color: #21b97a;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .filter_other_main_btn {
+    height: 50px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    display: flex;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    span:nth-child(1){
+      color: #21b97a;
+      flex: 1;
+    }
+    span:nth-child(2){
+      background-color: #21b97a;
+      color: #fff;
+      flex: 2;
+    }
+  }
+  .filter_normal_btn{
+    border-top: 1px solid #ccc;
+      height: 40px;
+      display: flex;
+      span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      span:nth-child(1){
+        color: #21b97a;
+        flex: 1;
+        background-color: #fff;
+      }
+      span:nth-child(2){
+        flex: 2;
+        background-color: #21b97a;
+        color: #fff;
+      }
+  }

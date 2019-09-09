@@ -6,4 +6,53 @@
     height: 45px;
     padding: 5px;
     font-size: 14px;
+}
+.hk_list_content {
+  height: calc(100vh - 140px );
+  overflow: auto;
+  .house_item {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    .house_item_img_wrap {
+      flex: 1;
+      padding: 20px;
+      img {
+        border-radius: 5px;
+      }
+    }
+
+    .house_item_info_wrap {
+      flex: 2;
+      .house_info1 {
+        font-weight: 600;
+        font-size: 15px;
+        padding: 10px 0;
+      }
+
+      .house_info2 {
+        color: #666;
+        font-size: 13px;
+        padding: 10px 0;
+      }
+
+      .house_info3 {
+        padding: 10px 0;
+
+        span {
+          background-color: #e1f5ed;
+          color: green;
+          margin-right: 15px;
+        }
+      }
+
+      .house_info4 {
+        color: red;
+        span {
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+    }
   }
+}
